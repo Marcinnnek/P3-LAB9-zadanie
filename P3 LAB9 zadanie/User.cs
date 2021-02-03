@@ -15,17 +15,20 @@ namespace P3_LAB9_zadanie
             UserName = userName;
         }
 
-
         public void SubskrybujKanał(Channel kanal)
         {
-            Console.WriteLine("Subskrybujesz kanał!");
-            kanal.OpublikowanoFilm += Kanal_OpublikowanoFilm; // podpiecie EventHandlera Channel pod użytkownika
+            Console.WriteLine("Subskrybujesz kanał! (User)");
+            kanal.LicznikSubow();
+            kanal.OpublikowanoFilm += Uzytkownik_OpublikowanoFilm; // podpiecie EventHandlera Channel pod użytkownika
         }
 
-        private void Kanal_OpublikowanoFilm(object sender, EventArgs e) // Event handler dla opublikowano film
+        private void Uzytkownik_OpublikowanoFilm(object sender, OpublikowanoFilmEventArgs e) 
         {
-            Console.WriteLine($"Użytkownik {1} zasubskrybował twój kanał");
+            // Event handler dla opublikowano film - (słuchacz) funkcja czeka na pojawienie się ewentu 
+            //(jest instrukcją jak zareagować na pojawienie się eventu)
 
+            Console.WriteLine($"Użytkownik id: {UserId}, {UserName} dostał powiadomienie o publikacji filmu! (User)");
+            Console.WriteLine($"Na kanale: {e.NazwaKanalu}opublikowano film. (User)");
         }
 
         public int UserId
@@ -50,8 +53,5 @@ namespace P3_LAB9_zadanie
                 _userName = value;
             }
         }
-
-        
-
     }
 }

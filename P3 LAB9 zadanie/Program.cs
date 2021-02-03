@@ -11,6 +11,7 @@
 
 
 using System;
+using System.Collections.Generic;
 
 namespace P3_LAB9_zadanie
 {
@@ -18,19 +19,30 @@ namespace P3_LAB9_zadanie
     {
         static void Main(string[] args)
         {
-            Channel kanal = new Channel(567, "U Gienka");
-            User user0 = new User(832, "Użyszkodnik 1");
-            User user1 = new User(8322, "Użyszkodnik 2");
-            User user2 = new User(8322, "Użyszkodnik 2");
+            Channel kanal = new Channel(567, "U Gienka Gejmera");
 
-
-            user0.SubskrybujKanał(kanal);
-            user1.SubskrybujKanał(kanal);
-            user2.SubskrybujKanał(kanal);
-
+            List<User> Uzyszkodnicy = new List<User>{
+                                                     new User(111, "Użyszkodnik Heniek"),
+                                                     new User(125, "Użyszkodnik Mirek"),
+                                                     new User(213, "Użyszkodnik Leszek"),
+                                                     new User(343, "Użyszkodnik Mietek"),
+                                                     new User(421, "Użyszkodnik Stasiek")
+                                                     };
+            foreach (var item in Uzyszkodnicy)
+            {
+                item.SubskrybujKanał(kanal);
+            }
 
             kanal.OpublikujFilm();
 
+            kanal.WyswietlFilm(Uzyszkodnicy[0].UserId);
+            kanal.WyswietlFilm(Uzyszkodnicy[2].UserId);
+            kanal.WyswietlFilm(Uzyszkodnicy[4].UserId);
+            kanal.WyswietlFilm(Uzyszkodnicy[2].UserId);
+
+            Console.WriteLine("#############################################################");
+
+            kanal.Wypisz();
 
         }
     }

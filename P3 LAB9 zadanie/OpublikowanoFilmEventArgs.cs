@@ -4,9 +4,9 @@ using System.Text;
 
 namespace P3_LAB9_zadanie
 {
-    class OpublikowanoFilmEventArgs:EventArgs
+    public class OpublikowanoFilmEventArgs:EventArgs
     {
-        public string NazwaUzytkownika { get; set; }
-        public int IdUzytkownika { get; set; }
+        public string NazwaKanalu { get; set; }
+        public int IdKanalu { get; set; }
     }
 }

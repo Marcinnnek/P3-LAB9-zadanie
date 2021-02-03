@@ -4,15 +4,14 @@ using System.Text;
 
 namespace P3_LAB9_zadanie
 {
-    class Channel
+    public class Channel
     {
         private int _channelId;
-        private string _userName;
+        private string _channelName;
         private int _viewMeter;
+        private int _licznikSubow;
 
-        public event EventHandler OpublikowanoFilm; // Dodano Event OpublikowanoFilm
-
- 
+        public event EventHandler<OpublikowanoFilmEventArgs> OpublikowanoFilm; // Dodano Event OpublikowanoFilm
 
         public Channel(int channelId, string channelName)
         {
@@ -23,16 +22,19 @@ namespace P3_LAB9_zadanie
         public void WyswietlFilm(int id)
         {
             _viewMeter++;
-            Console.WriteLine($"Wyświetlono film o id: {id}, liczba wyświetlneń: {ViewMeter}");
+            Console.WriteLine($"Wyświetlono film o id: {id}, liczba wyświetlneń: {ViewMeter} (Channel)");
         }
 
         public void OpublikujFilm()
         {
-            Console.WriteLine($"Opublikowano film!");
-            OpublikowanoFilm?.Invoke(this, EventArgs.Empty); // Publikacja Eventu OpublikowanoFilm
+            Console.WriteLine($"Opublikowano film! (Channel)");
+
+            OpublikowanoFilm?.Invoke(this, new OpublikowanoFilmEventArgs() { NazwaKanalu = ChannelName, IdKanalu = ChannelId }); // Publikacja Eventu OpublikowanoFilm
         }
-
-
+        public void LicznikSubow()
+        {
+            _licznikSubow++;
+        }
 
         public int ViewMeter
         {
@@ -56,15 +58,19 @@ namespace P3_LAB9_zadanie
         {
             get
             {
-                return _userName;
+                return _channelName;
             }
             set
             {
-                _userName = value;
+                _channelName = value;
             }
         }
-
-
-
+        public int LicznikSubskrybcji
+        {
+            get
+            {
+                return _licznikSubow;
+            }
+        }
     }
 }
